@@ -16,17 +16,17 @@ class UserData {
     required this.respMsg,
   });
 
-  TokenIdentity tokenIdentity;
-  bool isNewUser;
-  String respCode;
-  String respMsg;
+  late TokenIdentity tokenIdentity;
+  late bool isNewUser;
+  late String respCode;
+  late String? respMsg;
 
-  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-        tokenIdentity: TokenIdentity.fromJson(json["token_identity"]),
-        isNewUser: json["is_new_user"],
-        respCode: json["resp_code"],
-        respMsg: json["resp_msg"],
-      );
+  UserData.fromJson(Map<String, dynamic> json) {
+    tokenIdentity = TokenIdentity.fromJson(json["token_identity"]);
+    isNewUser = json["is_new_user"];
+    respCode = json["resp_code"];
+    respMsg = json["resp_msg"];
+  }
 
   Map<String, dynamic> toJson() => {
         "token_identity": tokenIdentity.toJson(),
@@ -43,15 +43,15 @@ class TokenIdentity {
     required this.firebaseToken,
   });
 
-  UserIdentity userIdentity;
-  String token;
-  String firebaseToken;
+  late UserIdentity userIdentity;
+  late String token;
+  late String firebaseToken;
 
-  factory TokenIdentity.fromJson(Map<String, dynamic> json) => TokenIdentity(
-        userIdentity: UserIdentity.fromJson(json["user_identity"]),
-        token: json["token"],
-        firebaseToken: json["firebase_token"],
-      );
+  TokenIdentity.fromJson(Map<String, dynamic> json) {
+    userIdentity = UserIdentity.fromJson(json["user_identity"]);
+    token = json["token"];
+    firebaseToken = json["firebase_token"];
+  }
 
   Map<String, dynamic> toJson() => {
         "user_identity": userIdentity.toJson(),

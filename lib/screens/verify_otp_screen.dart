@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:demo_project/services/call_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,16 +61,15 @@ class _VerifyOTPState extends State<VerifyOTP> {
         // ignore: unnecessary_null_comparison
         if (userCredential != null) {
           String token = await FirebaseAuth.instance.currentUser!.getIdToken();
-
-          User? response = await RemoteServices().apiCalling(
-            endPoint: "api/account/auth",
-            method: "post",
+          int id = 1;
+          await RemoteServices().apiCalling(
+            endPoint: "api/member/profile/{$id}",
+            method: "get",
             body: {
               "token": token,
               "provider": "firebase_phone_auth",
             },
-          ) as User;
-          log(response.toString());
+          );
         }
       } on FirebaseAuthException catch (e) {}
     }
